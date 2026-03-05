@@ -1,0 +1,77 @@
+clif_table,clif_field,epic_table,epic_column,data_type,notes
+patient,patient_id,PATIENT,PAT_ID,VARCHAR,Primary patient identifier
+patient,race_category,PATIENT_RACE,PATIENT_RACE_C,CATEGORY,Join to ZC_PATIENT_RACE for value; map to mCIDE
+patient,ethnicity_category,PATIENT,ETHNIC_GROUP_C,CATEGORY,Join to ZC_ETHNIC_GROUP; map to mCIDE
+patient,sex_category,PATIENT,SEX_C,CATEGORY,Join to ZC_SEX
+patient,date_of_birth,PATIENT,BIRTH_DATE,DATE,
+hospitalization,hospitalization_id,PAT_ENC_HSP,PAT_ENC_CSN_ID,VARCHAR,Contact Serial Number
+hospitalization,patient_id,PAT_ENC_HSP,PAT_ID,VARCHAR,Foreign key to patient
+hospitalization,admission_dttm,PAT_ENC_HSP,HOSP_ADMSN_TIME,DATETIME,
+hospitalization,discharge_dttm,PAT_ENC_HSP,HOSP_DISCH_TIME,DATETIME,
+hospitalization,age_at_admission,CALCULATED,BIRTH_DATE vs HOSP_ADMSN_TIME,INTEGER,Calculate from patient DOB
+hospitalization,admission_type_category,PAT_ENC_HSP,ADT_PAT_CLASS_C,CATEGORY,Map to mCIDE admission types
+hospitalization,discharge_disposition_category,PAT_ENC_HSP,DISCH_DISP_C,CATEGORY,Map to mCIDE discharge dispositions
+adt,hospitalization_id,CLARITY_ADT,PAT_ENC_CSN_ID,VARCHAR,
+adt,in_dttm,CLARITY_ADT,EFFECTIVE_TIME,DATETIME,
+adt,out_dttm,CLARITY_ADT,NEXT_OUT_EVENT_ID,DATETIME,Link to next event's EFFECTIVE_TIME
+adt,location_category,CLARITY_ADT,ADT_DEPARTMENT_ID,CATEGORY,Join to CLARITY_DEP; map to mCIDE location_category
+adt,location_type,CLARITY_DEP,SPECIALTY,CATEGORY,Determine ICU vs Floor vs ED
+vitals,hospitalization_id,IP_DATA_STORE,PAT_ENC_CSN_ID,VARCHAR,Join via INPATIENT_DATA_ID
+vitals,recorded_dttm,IP_FLWSHT_MEAS,RECORDED_TIME,DATETIME,
+vitals,vital_category,IP_FLWSHT_MEAS,FLO_MEAS_ID,CATEGORY,Site-specific; map to mCIDE vital_category
+vitals,vital_value,IP_FLWSHT_MEAS,MEAS_VALUE,FLOAT,
+labs,hospitalization_id,ORDER_PROC,PAT_ENC_CSN_ID,VARCHAR,
+labs,lab_order_dttm,ORDER_PROC,ORDER_TIME,DATETIME,
+labs,lab_result_dttm,ORDER_RESULTS,RESULT_TIME,DATETIME,
+labs,lab_category,CLARITY_COMPONENT,COMPONENT_ID,CATEGORY,Map component name to mCIDE lab_category
+labs,lab_value,ORDER_RESULTS,ORD_VALUE,FLOAT,
+labs,reference_unit,ORDER_RESULTS,REFERENCE_UNIT,VARCHAR,
+medication_orders,hospitalization_id,ORDER_MED,PAT_ENC_CSN_ID,VARCHAR,
+medication_orders,order_id,ORDER_MED,ORDER_MED_ID,VARCHAR,
+medication_orders,med_order_dttm,ORDER_MED,ORDER_INST,DATETIME,
+medication_orders,med_name,CLARITY_MEDICATION,NAME,VARCHAR,Join via MEDICATION_ID
+medication_orders,med_category,CLARITY_MEDICATION,THERA_CLASS_C,CATEGORY,Map therapeutic class to mCIDE
+medication_orders,med_dose,ORDER_MED,HV_DISCRETE_DOSE,FLOAT,
+medication_orders,med_dose_unit,ORDER_MED,HV_DOSE_UNIT_C,VARCHAR,Join to ZC_MED_UNIT
+medication_orders,med_route,ORDER_MED,MED_ROUTE_C,CATEGORY,Join to ZC_MED_ROUTE
+medication_admin_continuous,hospitalization_id,ORDER_MED,PAT_ENC_CSN_ID,VARCHAR,Via ORDER_MED_ID join
+medication_admin_continuous,admin_dttm,MAR_ADMIN_INFO,TAKEN_TIME,DATETIME,
+medication_admin_continuous,med_name,CLARITY_MEDICATION,NAME,VARCHAR,Via ORDER_MED_ID -> MEDICATION_ID
+medication_admin_continuous,med_category,CLARITY_MEDICATION,THERA_CLASS_C,CATEGORY,Map to mCIDE
+medication_admin_continuous,med_dose,MAR_ADMIN_INFO,MAR_INF_RATE,FLOAT,Infusion rate
+medication_admin_continuous,med_dose_unit,MAR_ADMIN_INFO,MAR_INF_RATE_UNIT_C,VARCHAR,Rate unit
+medication_admin_intermittent,hospitalization_id,ORDER_MED,PAT_ENC_CSN_ID,VARCHAR,Via ORDER_MED_ID join
+medication_admin_intermittent,admin_dttm,MAR_ADMIN_INFO,TAKEN_TIME,DATETIME,
+medication_admin_intermittent,med_name,CLARITY_MEDICATION,NAME,VARCHAR,Via ORDER_MED_ID -> MEDICATION_ID
+medication_admin_intermittent,med_category,CLARITY_MEDICATION,THERA_CLASS_C,CATEGORY,Map to mCIDE
+medication_admin_intermittent,med_dose,MAR_ADMIN_INFO,SIG,FLOAT,Discrete dose given
+medication_admin_intermittent,med_dose_unit,MAR_ADMIN_INFO,DOSE_UNIT_C,VARCHAR,
+respiratory_support,hospitalization_id,IP_DATA_STORE,PAT_ENC_CSN_ID,VARCHAR,Join via INPATIENT_DATA_ID
+respiratory_support,recorded_dttm,IP_FLWSHT_MEAS,RECORDED_TIME,DATETIME,
+respiratory_support,device_category,IP_FLWSHT_MEAS,FLO_MEAS_ID,CATEGORY,Device flowsheet row; map to mCIDE
+respiratory_support,mode_category,IP_FLWSHT_MEAS,FLO_MEAS_ID,CATEGORY,Mode flowsheet row; map to mCIDE
+respiratory_support,fio2,IP_FLWSHT_MEAS,MEAS_VALUE,FLOAT,FiO2 flowsheet row
+respiratory_support,peep,IP_FLWSHT_MEAS,MEAS_VALUE,FLOAT,PEEP flowsheet row
+respiratory_support,tidal_volume_set,IP_FLWSHT_MEAS,MEAS_VALUE,FLOAT,Set tidal volume row
+respiratory_support,tidal_volume_observed,IP_FLWSHT_MEAS,MEAS_VALUE,FLOAT,Measured tidal volume row
+microbiology_culture,hospitalization_id,ORDER_PROC,PAT_ENC_CSN_ID,VARCHAR,
+microbiology_culture,collect_dttm,ORDER_PROC,SPECIMN_TAKEN_TIME,DATETIME,
+microbiology_culture,result_dttm,ORDER_RESULTS,RESULT_TIME,DATETIME,
+microbiology_culture,organism_category,MICRO_ORGANISM,ORGANISM_ID,CATEGORY,Map to mCIDE organism_category
+microbiology_culture,fluid_category,ORDER_PROC,SPECIMEN_TYPE_C,CATEGORY,Map to mCIDE fluid_category
+sensitivity,antibiotic,SUSCEPTIBILITY,ANTIBIOTIC_C,VARCHAR,Join to ZC_ANTIBIOTIC
+sensitivity,susceptibility_category,SUSCEPTIBILITY,SUSCEPT_C,CATEGORY,S/I/R
+sensitivity,mic_value,SUSCEPTIBILITY,MIC_VALUE,FLOAT,
+position,hospitalization_id,IP_DATA_STORE,PAT_ENC_CSN_ID,VARCHAR,
+position,recorded_dttm,IP_FLWSHT_MEAS,RECORDED_TIME,DATETIME,
+position,position_category,IP_FLWSHT_MEAS,MEAS_VALUE,CATEGORY,Position flowsheet row; map to mCIDE
+crrt_therapy,hospitalization_id,IP_DATA_STORE,PAT_ENC_CSN_ID,VARCHAR,
+crrt_therapy,recorded_dttm,IP_FLWSHT_MEAS,RECORDED_TIME,DATETIME,
+crrt_therapy,crrt_mode_category,IP_FLWSHT_MEAS,MEAS_VALUE,CATEGORY,CRRT mode flowsheet row; map to mCIDE
+code_status,hospitalization_id,IP_DATA_STORE,PAT_ENC_CSN_ID,VARCHAR,
+code_status,recorded_dttm,IP_FLWSHT_MEAS,RECORDED_TIME,DATETIME,
+code_status,code_status_category,IP_FLWSHT_MEAS,MEAS_VALUE,CATEGORY,Code status flowsheet row; map to mCIDE
+hospital_diagnosis,hospitalization_id,HSP_ACCT_DX_LIST,PAT_ENC_CSN_ID,VARCHAR,
+hospital_diagnosis,diagnosis_code,EDG_CURRENT_ICD10,CODE,VARCHAR,Join via DX_ID
+hospital_diagnosis,diagnosis_name,EDG_CURRENT_ICD10,DX_NAME,VARCHAR,
+hospital_diagnosis,diagnosis_type,HSP_ACCT_DX_LIST,PRINCIPAL_DX_YN,CATEGORY,Y=Principal
