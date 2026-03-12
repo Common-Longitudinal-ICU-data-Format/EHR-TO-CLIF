@@ -1,0 +1,33 @@
+clif_table,clif_category,common_flowsheet_names,notes
+vitals,heart_rate,"Heart Rate, Pulse, HR",
+vitals,sbp,"Systolic BP, SBP, Blood Pressure Systolic, Arterial Systolic",
+vitals,dbp,"Diastolic BP, DBP, Blood Pressure Diastolic, Arterial Diastolic",
+vitals,map,"MAP, Mean Arterial Pressure, Arterial Mean",
+vitals,spo2,"SpO2, Oxygen Saturation, Pulse Ox, O2 Sat",
+vitals,respiratory_rate,"Respiratory Rate, RR, Resp Rate, Respirations",
+vitals,temp_c,"Temperature, Temp, Core Temp, Rectal Temp, Oral Temp, Axillary Temp",Temperature may need F→C conversion
+vitals,height,"Height, Ht, Patient Height",
+vitals,weight,"Weight, Wt, Patient Weight",
+vitals,gcs_total,"GCS Total, Glasgow Coma Scale, GCS",
+vitals,gcs_eye,"GCS Eye, Glasgow Eye",
+vitals,gcs_motor,"GCS Motor, Glasgow Motor",
+vitals,gcs_verbal,"GCS Verbal, Glasgow Verbal",
+respiratory_support,device_category,"Oxygen Device, O2 Delivery Device, Respiratory Device, Vent Type",Map values to: IMV/NIPPV/CPAP/High Flow NC/Face Mask/Trach Collar/Nasal Cannula/Room Air
+respiratory_support,mode_category,"Mode of Ventilation, Vent Mode, Ventilator Mode",Map values to: AC/VC/PC/SIMV/CPAP/BiPAP/PSV/APRV/HFOV/PRVC
+respiratory_support,fio2,"FiO2, Fraction Inspired O2, O2 %, Oxygen Concentration",Convert percentage to decimal if needed
+respiratory_support,peep,"PEEP, CPAP, Positive End Expiratory Pressure",
+respiratory_support,tidal_volume_set,"Tidal Volume (Set), TV Set, Vt Set",
+respiratory_support,tidal_volume_observed,"Tidal Volume (Observed), Tidal Volume (Measured), TV Exhaled, Vt Exhaled",
+respiratory_support,respiratory_rate_set,"Resp Rate (Set), RR Set, Ventilator Rate",
+respiratory_support,respiratory_rate_observed,"Resp Rate (Observed), RR Total, Total Respiratory Rate",
+respiratory_support,pip,"PIP, Peak Inspiratory Pressure",
+respiratory_support,plateau_pressure,"Plateau Pressure, Pplat",
+respiratory_support,minute_ventilation,"Minute Ventilation, MV, VE",
+respiratory_support,flow_rate,"O2 Flow Rate, Flow Rate, Oxygen Flow",Liters per minute
+position,position_category,"Position, Patient Position, Body Position",Map values to: prone/supine/lateral/sitting
+crrt_therapy,crrt_mode_category,"CRRT Mode, Dialysis Mode, RRT Mode",Map values to: SCUF/CVVH/CVVHD/CVVHDF/AVVH
+crrt_therapy,blood_flow_rate,"Blood Flow Rate, Qb, BFR",
+crrt_therapy,dialysate_flow_rate,"Dialysate Flow, Qd",
+crrt_therapy,replacement_flow_rate,"Replacement Fluid Rate, Qr",
+crrt_therapy,ultrafiltration_rate,"Ultrafiltration Rate, UF Rate, Net UF",
+code_status,code_status_category,"Code Status, Resuscitation Status, DNR Status",Map values to: Full Code/DNR/DNI/Comfort Care
